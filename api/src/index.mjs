@@ -14,17 +14,24 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+
 app.get("/", function (req, res) {
   res.json({ health: "ok" });
-})
+});
+
 app.get("/studios", function (req, res) {
-  let disneyTemp = { ...disney };
-  delete disneyTemp.movies;
-  let warnerTemp = { ...warner };
-  delete warnerTemp.movies;
-  let sonyTemp = { ...sony };
-  delete sonyTemp.movies;
-  res.json([disneyTemp, warnerTemp, sonyTemp]);
+  const removeMovies = (studio) => {
+    const { movies, ...rest } = studio;
+    return rest;
+  };
+
+  const response = [
+    removeMovies(disney),
+    removeMovies(warner),
+    removeMovies(sony),
+  ];
+
+  res.json(response);
 });
 
 app.get("/movies", function (req, res) {
