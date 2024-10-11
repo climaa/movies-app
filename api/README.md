@@ -20,3 +20,8 @@ Go to terminal and type
 ```shell
 npm start
 ```
+
+### CI / CD
+
+This repository uses the library <https://pactumjs.github.io/>, to validate the responses inside the github actions.
+The command to install was `npx pactum-init` please see the official documentation <https://pactumjs.github.io/introduction/quick-start.html>
