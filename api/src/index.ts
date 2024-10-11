@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { getAllMoviesFromStudios, getMovieById } from "@helpers/helpers";
+import { getUserByUsernameAndPassword } from "@helpers/auth";
 import {
   disney,
   movieAge,
@@ -59,7 +60,23 @@ app.get("/movieAge", function (_req: Request, res: Response) {
 // TODO: 1 add the capability to sell the movie rights to another studio
 app.post("/transfer", function (_req: Request, res: Response) {});
 
-// TODO: 2 Add logging capabilities into the movies-app
+app.post("/login", function (req: Request, res: Response) {
+  const { username, password } = req.body as { username: string; password: string };
+  if (username === "" || password === "") {
+    res.status(400).json({ error: "Missing username or password" });
+    return;
+  }
+
+  const user = getUserByUsernameAndPassword({ username, password });
+
+  if (!user) {
+    res.status(401).json({ error: "Invalid username or password" });
+    return;
+  }
+
+  res.json(user);
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
