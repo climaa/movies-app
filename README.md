@@ -15,3 +15,33 @@ The api folder contains a small express api
 ## Tip
 
 We recommended using the editor VS Code with suggested extensions. Keep eye into file `.vscode/extensions.json`
+
+### For testing application
+
+Please use node **v20**
+
+Run backend:
+
+```shell
+cd api
+npm install
+npm run build
+npm start
+```
+
+Run the front end
+
+```shell
+cd movies-app
+npm install
+npm run build
+```
+
+Read: <https://create-react-app.dev/docs/deployment/#static-server>
+
+Continuing executing
+
+```shell
+npm install -g serve
+serve -s build -l 3001
+```
