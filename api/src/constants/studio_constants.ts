@@ -78,7 +78,7 @@ export const disney: Studio = {
       id: "11",
       name: "Nightmare before christmas",
       genre: GENRE_ID.horror,
-      img: "https://www.dimanoinmano.it/img/638590/full/libri-per-ragazzi/infanzia/nightmare-before-christmas.jpg",
+      url: "https://www.dimanoinmano.it/img/638590/full/libri-per-ragazzi/infanzia/nightmare-before-christmas.jpg",
       price: 600,
     },
     {
@@ -116,14 +116,14 @@ export const warner: Studio = {
       id: "21",
       name: "The conjuring",
       genre: GENRE_ID.horror,
-      img: "https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_.jpg",
+      url: "https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_.jpg",
       price: 1000000000,
     },
     {
       id: "22",
       name: "Space Jame",
       genre: GENRE_ID.animation,
-      img: "https://static.wikia.nocookie.net/warnerbros/images/d/d0/SpaceJam.jpg/revision/latest/scale-to-width-down/350?cb=20120727135751&path-prefix=es",
+      url: "https://static.wikia.nocookie.net/warnerbros/images/d/d0/SpaceJam.jpg/revision/latest/scale-to-width-down/350?cb=20120727135751&path-prefix=es",
       price: 500,
     },
     {
@@ -137,7 +137,7 @@ export const warner: Studio = {
       id: "24",
       name: "Fantastic beasts and where to find them",
       genre: GENRE_ID.adventures,
-      img: "https://i.pinimg.com/originals/11/95/b8/1195b802fe9108f0458830054ba1fd57.jpg",
+      url: "https://i.pinimg.com/originals/11/95/b8/1195b802fe9108f0458830054ba1fd57.jpg",
       price: 500,
     },
   ],
@@ -151,27 +151,31 @@ export const sony: Studio = {
   money: 700,
   movies: [
     {
-      id: "31",
-      name: "Slender man",
       genre: GENRE_ID.horror,
+      id: "31",
+      url: "https://m.media-amazon.com/images/M/MV5BMzVmMGMzODEtZmQ3Yy00NTU0LTgzNWMtYTkyYWQwY2Q3Y2U0XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      name: "Slender man",
       price: 700,
     },
     {
-      id: "32",
-      name: "Spider-man into the spider-verse",
       genre: GENRE_ID.animation,
+      id: "32",
+      url: "https://m.media-amazon.com/images/M/MV5BMjMwNDkxMTgzOF5BMl5BanBnXkFtZTgwNTkwNTQ3NjM@._V1_QL75_UX380_CR0,1,380,562_.jpg",
+      name: "Spider-man into the spider-verse",
       price: 450,
     },
     {
-      id: "33",
-      name: "Spider-man",
       genre: GENRE_ID.heroes,
+      id: "33",
+      url: "https://m.media-amazon.com/images/M/MV5BZWM0OWVmNTEtNWVkOS00MzgyLTkyMzgtMmE2ZTZiNjY4MmFiXkEyXkFqcGc@._V1_QL75_UY562_CR0,0,380,562_.jpg",
+      name: "Spider-man",
       price: 500,
     },
     {
-      id: "34",
-      name: "Last action hero",
       genre: GENRE_ID.adventures,
+      id: "34",
+      url: "https://m.media-amazon.com/images/M/MV5BZDEwY2FkNDYtNTVjYi00YWFkLWJmOWMtYjk5NTMyNzZlYWEwXkEyXkFqcGc@._V1_QL75_UY562_CR19,0,380,562_.jpg",
+      name: "Last action hero",
       price: 10000000000000,
     },
   ],
@@ -197,7 +201,7 @@ export const sonyImages: { [n: number]: string } = {
 
 /**
  * A mapping of studio IDs to their respective studio names.
- * 
+ *
  * @constant
  * @type {Object.<number, string>}
  * @property {string} 1 - Disney studio.

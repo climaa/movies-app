@@ -1,94 +1,86 @@
 [
   {
+    "genre": 6,
     "id": "11",
-    "name": "Nightmare before christmas",
-    "genre": 6,
     "img": "https://www.dimanoinmano.it/img/638590/full/libri-per-ragazzi/infanzia/nightmare-before-christmas.jpg",
-    "price": 600,
+    "name": "Nightmare before christmas",
     "studioId": "1"
   },
   {
+    "genre": 4,
     "id": "12",
-    "name": "Aladdin",
-    "genre": 4,
-    "price": 10000000000,
     "img": "https://www.lainformacion.com/files/article_default_content/uploads/2018/11/23/5bf84292d23b5.jpeg",
+    "name": "Aladdin",
     "studioId": "1"
   },
   {
+    "genre": 1,
     "id": "13",
-    "name": "The avengers",
-    "genre": 1,
-    "price": 300,
     "img": "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/2/2b/The_Avengers_Poster.png/revision/latest?cb=20150610135853&path-prefix=es",
+    "name": "The avengers",
     "studioId": "1"
   },
   {
+    "genre": 9,
     "id": "14",
-    "name": "John Carter",
-    "genre": 9,
-    "price": 400,
     "img": "https://upload.wikimedia.org/wikipedia/en/thumb/a/aa/John_carter_poster.jpg/220px-John_carter_poster.jpg",
+    "name": "John Carter",
     "studioId": "1"
   },
   {
+    "genre": 6,
     "id": "21",
-    "name": "The conjuring",
-    "genre": 6,
     "img": "https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_.jpg",
-    "price": 1000000000,
+    "name": "The conjuring",
     "studioId": "2"
   },
   {
+    "genre": 4,
     "id": "22",
-    "name": "Space Jame",
-    "genre": 4,
     "img": "https://static.wikia.nocookie.net/warnerbros/images/d/d0/SpaceJam.jpg/revision/latest/scale-to-width-down/350?cb=20120727135751&path-prefix=es",
-    "price": 500,
+    "name": "Space Jame",
     "studioId": "2"
   },
   {
+    "genre": 1,
     "id": "23",
-    "name": "The dark knight rises",
-    "genre": 1,
-    "price": 400,
     "img": "https://pics.filmaffinity.com/The_Dark_Knight_Rises-149544881-large.jpg",
+    "name": "The dark knight rises",
     "studioId": "2"
   },
   {
+    "genre": 9,
     "id": "24",
-    "name": "Fantastic beasts and where to find them",
-    "genre": 9,
     "img": "https://i.pinimg.com/originals/11/95/b8/1195b802fe9108f0458830054ba1fd57.jpg",
-    "price": 500,
+    "name": "Fantastic beasts and where to find them",
     "studioId": "2"
   },
   {
-    "id": "31",
-    "name": "Slender man",
     "genre": 6,
-    "price": 700,
+    "id": "31",
+    "img": "https://m.media-amazon.com/images/M/MV5BMzVmMGMzODEtZmQ3Yy00NTU0LTgzNWMtYTkyYWQwY2Q3Y2U0XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+    "name": "Slender man",
     "studioId": "3"
   },
   {
-    "id": "32",
-    "name": "Spider-man into the spider-verse",
     "genre": 4,
-    "price": 450,
+    "id": "32",
+    "img": "https://m.media-amazon.com/images/M/MV5BMjMwNDkxMTgzOF5BMl5BanBnXkFtZTgwNTkwNTQ3NjM@._V1_QL75_UX380_CR0,1,380,562_.jpg",
+    "name": "Spider-man into the spider-verse",
     "studioId": "3"
   },
   {
-    "id": "33",
-    "name": "Spider-man",
     "genre": 1,
-    "price": 500,
+    "id": "33",
+    "img": "https://m.media-amazon.com/images/M/MV5BZWM0OWVmNTEtNWVkOS00MzgyLTkyMzgtMmE2ZTZiNjY4MmFiXkEyXkFqcGc@._V1_QL75_UY562_CR0,0,380,562_.jpg",
+    "name": "Spider-man",
     "studioId": "3"
   },
   {
-    "id": "34",
-    "name": "Last action hero",
     "genre": 9,
-    "price": 10000000000000,
+    "id": "34",
+    "img": "https://m.media-amazon.com/images/M/MV5BZDEwY2FkNDYtNTVjYi00YWFkLWJmOWMtYjk5NTMyNzZlYWEwXkEyXkFqcGc@._V1_QL75_UY562_CR19,0,380,562_.jpg",
+    "name": "Last action hero",
     "studioId": "3"
   }
 ]

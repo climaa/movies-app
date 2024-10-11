@@ -1,7 +1,7 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { getAllMoviesFromStudios } from "@helpers/helpers";
+import { getAllMoviesFromStudios, getMovieById } from "@helpers/helpers";
 import {
   disney,
   movieAge,
@@ -9,19 +9,19 @@ import {
   sony,
   warner,
 } from "@constants/studio_constants";
-import type { Studio, Movie } from "@constants/types";
+import type { Studio, OnlyStudio } from "@constants/types";
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get("/", function (req, res) {
+app.get("/", function (_req: Request, res: Response) {
   res.json({ health: "ok" });
 });
 
-app.get("/studios", function (req, res) {
-  const removeMovies = (studio: Studio) => {
+app.get("/studios", function (_req: Request, res: Response) {
+  const removeMovies = (studio: Studio): OnlyStudio => {
     const { movies, ...rest } = studio;
     return rest;
   };
@@ -35,20 +35,29 @@ app.get("/studios", function (req, res) {
   res.json(response);
 });
 
-app.get("/movies", function (req, res) {
-  try {
-    res.json(getAllMoviesFromStudios([disney, warner, sony]));
-  } catch (e) {
-    res.status(500);
-  }
+app.get("/movies", function (_req: Request, res: Response) {
+  // TODO: If any bad "request"; logic should be handled on middleware
+  res.json(getAllMoviesFromStudios([disney, warner, sony]));
 });
 
-app.get("/movieAge", function (req, res) {
+// TODO: Here can be a decorator <https://www.typescriptlang.org/docs/handbook/decorators.html>
+app.get("/movies/:id", function (req: Request, res: Response) {
+  const { id } = req.params as { id: string };
+
+  if (Number(id) < 0) {
+    res.status(400).json({ error: "Invalid id" });
+    return
+  }
+
+  res.json(getMovieById([disney, warner, sony], id));
+});
+
+app.get("/movieAge", function (_req: Request, res: Response) {
   res.json(movieAge);
 });
 
 // TODO: 1 add the capability to sell the movie rights to another studio
-app.post("/transfer", function (req, res) {});
+app.post("/transfer", function (_req: Request, res: Response) {});
 
 // TODO: 2 Add logging capabilities into the movies-app
 app.listen(PORT, () => {

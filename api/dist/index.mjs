@@ -7,28 +7,23 @@ import bodyParser from "body-parser";
 var getAllMoviesFromStudios = (studios) => {
   const allMovies = [];
   studios.forEach((singleStudio) => {
-    singleStudio.movies.map((movie) => {
+    singleStudio.movies.forEach((movie) => {
       allMovies.push(movieConstructor(movie, singleStudio));
     });
   });
   return allMovies;
 };
-var movieConstructor = (movie, studio) => {
-  if (movie.url) {
-    Object.defineProperty(
-      movie,
-      "img",
-      Object.getOwnPropertyDescriptor(movie, "url") || ""
-    );
-    delete movie["url"];
-  }
-  Object.defineProperty(
-    movie,
-    "studioId",
-    Object.getOwnPropertyDescriptor(studio, "id") || ""
-  );
-  return movie;
+var getMovieById = (studios, id) => {
+  const allMovies = getAllMoviesFromStudios(studios);
+  return allMovies?.find((movie) => movie.id === id);
 };
+var movieConstructor = (movie, studio) => ({
+  genre: movie.genre,
+  id: movie.id,
+  img: movie.url,
+  name: movie.name,
+  studioId: studio.id
+});
 
 // src/constants/studio_constants.ts
 var PORT = 3e3;
@@ -105,7 +100,7 @@ var disney = {
       id: "11",
       name: "Nightmare before christmas",
       genre: GENRE_ID.horror,
-      img: "https://www.dimanoinmano.it/img/638590/full/libri-per-ragazzi/infanzia/nightmare-before-christmas.jpg",
+      url: "https://www.dimanoinmano.it/img/638590/full/libri-per-ragazzi/infanzia/nightmare-before-christmas.jpg",
       price: 600
     },
     {
@@ -142,14 +137,14 @@ var warner = {
       id: "21",
       name: "The conjuring",
       genre: GENRE_ID.horror,
-      img: "https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_.jpg",
+      url: "https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_.jpg",
       price: 1e9
     },
     {
       id: "22",
       name: "Space Jame",
       genre: GENRE_ID.animation,
-      img: "https://static.wikia.nocookie.net/warnerbros/images/d/d0/SpaceJam.jpg/revision/latest/scale-to-width-down/350?cb=20120727135751&path-prefix=es",
+      url: "https://static.wikia.nocookie.net/warnerbros/images/d/d0/SpaceJam.jpg/revision/latest/scale-to-width-down/350?cb=20120727135751&path-prefix=es",
       price: 500
     },
     {
@@ -163,7 +158,7 @@ var warner = {
       id: "24",
       name: "Fantastic beasts and where to find them",
       genre: GENRE_ID.adventures,
-      img: "https://i.pinimg.com/originals/11/95/b8/1195b802fe9108f0458830054ba1fd57.jpg",
+      url: "https://i.pinimg.com/originals/11/95/b8/1195b802fe9108f0458830054ba1fd57.jpg",
       price: 500
     }
   ]
@@ -176,27 +171,31 @@ var sony = {
   money: 700,
   movies: [
     {
-      id: "31",
-      name: "Slender man",
       genre: GENRE_ID.horror,
+      id: "31",
+      url: "https://m.media-amazon.com/images/M/MV5BMzVmMGMzODEtZmQ3Yy00NTU0LTgzNWMtYTkyYWQwY2Q3Y2U0XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      name: "Slender man",
       price: 700
     },
     {
-      id: "32",
-      name: "Spider-man into the spider-verse",
       genre: GENRE_ID.animation,
+      id: "32",
+      url: "https://m.media-amazon.com/images/M/MV5BMjMwNDkxMTgzOF5BMl5BanBnXkFtZTgwNTkwNTQ3NjM@._V1_QL75_UX380_CR0,1,380,562_.jpg",
+      name: "Spider-man into the spider-verse",
       price: 450
     },
     {
-      id: "33",
-      name: "Spider-man",
       genre: GENRE_ID.heroes,
+      id: "33",
+      url: "https://m.media-amazon.com/images/M/MV5BZWM0OWVmNTEtNWVkOS00MzgyLTkyMzgtMmE2ZTZiNjY4MmFiXkEyXkFqcGc@._V1_QL75_UY562_CR0,0,380,562_.jpg",
+      name: "Spider-man",
       price: 500
     },
     {
-      id: "34",
-      name: "Last action hero",
       genre: GENRE_ID.adventures,
+      id: "34",
+      url: "https://m.media-amazon.com/images/M/MV5BZDEwY2FkNDYtNTVjYi00YWFkLWJmOWMtYjk5NTMyNzZlYWEwXkEyXkFqcGc@._V1_QL75_UY562_CR19,0,380,562_.jpg",
+      name: "Last action hero",
       price: 1e13
     }
   ]
@@ -206,10 +205,10 @@ var sony = {
 var app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.get("/", function(req, res) {
+app.get("/", function(_req, res) {
   res.json({ health: "ok" });
 });
-app.get("/studios", function(req, res) {
+app.get("/studios", function(_req, res) {
   const removeMovies = (studio) => {
     const { movies, ...rest } = studio;
     return rest;
@@ -221,17 +220,21 @@ app.get("/studios", function(req, res) {
   ];
   res.json(response);
 });
-app.get("/movies", function(req, res) {
-  try {
-    res.json(getAllMoviesFromStudios([disney, warner, sony]));
-  } catch (e) {
-    res.status(500);
-  }
+app.get("/movies", function(_req, res) {
+  res.json(getAllMoviesFromStudios([disney, warner, sony]));
 });
-app.get("/movieAge", function(req, res) {
+app.get("/movies/:id", function(req, res) {
+  const { id } = req.params;
+  if (Number(id) < 0) {
+    res.status(400).json({ error: "Invalid id" });
+    return;
+  }
+  res.json(getMovieById([disney, warner, sony], id));
+});
+app.get("/movieAge", function(_req, res) {
   res.json(movieAge);
 });
-app.post("/transfer", function(req, res) {
+app.post("/transfer", function(_req, res) {
 });
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);

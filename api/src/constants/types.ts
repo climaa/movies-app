@@ -1,17 +1,29 @@
-export interface Studio {
-    id: string;
-    name: string;
-    shortName: string;
-    logo: string;
-    money: number;
-    movies: Movie[];
-  }
-  
-  export interface Movie {
-    id: string;
-    name: string;
-    genre: number;
-    img?: string;
-    url?: string;
-    price: number;
-  }
+export interface OnlyStudio {
+  id: string;
+  logo: string;
+  money: number;
+  name: string;
+  shortName: string;
+}
+
+export interface Movies {
+  movies: Movie[];
+}
+
+export type Studio = OnlyStudio & Movies;
+
+export interface Movie {
+  genre: number;
+  id: string;
+  name: string;
+  price: number;
+  url: string;
+}
+
+export interface ConstructorMovie {
+  genre: number;
+  id: string;
+  img: string;
+  name: string;
+  studioId: string;
+}

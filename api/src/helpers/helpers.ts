@@ -1,5 +1,4 @@
-import { GENRE_STRING } from "@constants/studio_constants";
-import type { Studio, Movie } from "@constants/types";
+import type { Studio, Movie, ConstructorMovie, OnlyStudio } from "@constants/types";
 
 export const getMovie = (
   movieId: string,
@@ -10,6 +9,7 @@ export const getMovie = (
     movie = t.movies.find((p) => p.id === movieId);
     return movie;
   });
+
   if (movie && studio) {
     return { movie, studioId: studio.id };
   }
@@ -17,11 +17,11 @@ export const getMovie = (
   return false;
 };
 
-export const getAllMoviesFromStudios = (studios: Studio[]): Movie[] => {
-  const allMovies: Movie[] = [];
+export const getAllMoviesFromStudios = (studios: Studio[]): ConstructorMovie[] => {
+  const allMovies: ConstructorMovie[] = [];
 
   studios.forEach((singleStudio) => {
-    singleStudio.movies.map((movie) => {
+    (singleStudio.movies as unknown as Movie[]).forEach((movie: Movie) => {
       allMovies.push(movieConstructor(movie, singleStudio));
     });
   });
@@ -29,28 +29,19 @@ export const getAllMoviesFromStudios = (studios: Studio[]): Movie[] => {
   return allMovies;
 };
 
-export const movieConstructor = (movie: Movie, studio: Studio): Movie => {
-  //Set url property to img
-  if (movie.url) {
-    Object.defineProperty(
-      movie,
-      "img",
-      Object.getOwnPropertyDescriptor(movie, "url") || ""
-    );
-    delete movie["url"]; // ???
-  } 
-  // TODO: something with GENRE_STRING[movie.price]; ???
-  
-  // Add studioId from parent object
-  Object.defineProperty(
-    movie,
-    "studioId",
-    Object.getOwnPropertyDescriptor(studio, "id") || ""
-  );
+export const getMovieById = (studios: Studio[], id: string): ConstructorMovie | undefined => {
+  const allMovies = getAllMoviesFromStudios(studios);
 
-  // TODO: Remove non wanted properties ???
-  // delete movie["price"];
-  // delete movie["id"];
-
-  return movie;
+  return allMovies?.find((movie) => movie.id === id);
 };
+
+export const movieConstructor = (
+  movie: Movie,
+  studio: OnlyStudio
+): ConstructorMovie => ({
+  genre: movie.genre,
+  id: movie.id,
+  img: movie.url,
+  name: movie.name,
+  studioId: studio.id,
+});
