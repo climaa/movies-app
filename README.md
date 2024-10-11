@@ -12,6 +12,6 @@ The api folder contains a small express api
 6. Add a log (plain text file) with the issues that you faced during the test and how you solved them
 7. (Optional) fix any vulnerabilities you find
 
-## How you will do it?
-You need to complete all the items listed before and push the changes to a new branch. That branch must be named ``[NameSurname]`` 
+## Tip
 
+We recommended using the editor VS Code with suggested extensions. Keep eye into file `.vscode/extensions.json`
