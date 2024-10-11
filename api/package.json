@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha __tests__/**/*.js",
-    "start": "nodemon --experimental-modules ./src/index.mjs"
+    "dev": "tsup src/index.ts --format esm --watch --onSuccess \"node dist/index.mjs\"",
+    "build": "tsup src/index.ts --format esm",
+    "start": "node dist/index.mjs",
+    "tsc": "tsc --noEmit"
   },
   "author": "",
   "license": "ISC",
@@ -17,8 +20,13 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
     "mocha": "^10.7.3",
     "nodemon": "^1.19.1",
-    "pactum": "^3.7.1"
+    "pactum": "^3.7.1",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.3"
   }
 }

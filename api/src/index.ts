@@ -1,14 +1,15 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { getAllMoviesFromStudios } from "../src/helpers.mjs";
+import { getAllMoviesFromStudios } from "@helpers/helpers";
 import {
   disney,
   movieAge,
   PORT,
   sony,
   warner,
-} from "../constants/studio_constants.mjs";
+} from "@constants/studio_constants";
+import type { Studio, Movie } from "@constants/types";
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/studios", function (req, res) {
-  const removeMovies = (studio) => {
+  const removeMovies = (studio: Studio) => {
     const { movies, ...rest } = studio;
     return rest;
   };
@@ -38,7 +39,7 @@ app.get("/movies", function (req, res) {
   try {
     res.json(getAllMoviesFromStudios([disney, warner, sony]));
   } catch (e) {
-    res.statusCode(500);
+    res.status(500);
   }
 });
 
