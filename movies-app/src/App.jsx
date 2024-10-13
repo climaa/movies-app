@@ -1,6 +1,7 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import useFetch from "./api/fetch";
+import { createStudioNameMapping } from "./utils";
 import { Avatar, Card, Paper, Grid, Typography } from "@material-ui/core";
 
 const App = () => {
@@ -10,6 +11,8 @@ const App = () => {
   });
   const { status: studioStatus, data: studios } = useFetch("/studios");
   const { status: moviesStatus, data: movies } = useFetch("/movies");
+
+  const studioNameMapping = useMemo(() => createStudioNameMapping(studios), [studios]);
 
   return (
     <div className="App">
@@ -45,7 +48,7 @@ const App = () => {
             container
             justifyContent="center"
           >
-            {movies.map((movie) => (
+            {movies.map((movie, idx) => (
               <Grid key={movie.id} item xs={12} sm={6} lg={4}>
                 <Card className={state.cardStyle}>
                   <Avatar
@@ -58,14 +61,18 @@ const App = () => {
                     }}
                   />
                   <div>
+                    <Typography color="primary">Name: </Typography>
                     <Typography className="App__movie__name">
                       {movie.name}
                     </Typography>
+                    <Typography color="info">Position: </Typography>
                     <Typography className="App__movie__position">
                       {movie.position}
                     </Typography>
                   </div>
-                  {/* TODO: Get studio name from this element */}
+                  <Typography>
+                    {studioNameMapping[movie?.studioId]}
+                  </Typography>
                 </Card>
               </Grid>
             ))}

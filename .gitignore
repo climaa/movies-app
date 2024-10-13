@@ -1,3 +1,4 @@
 node_modules
 dist
 movies-app/build/
+api/dist/index.mjs

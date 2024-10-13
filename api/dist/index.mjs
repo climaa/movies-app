@@ -25,6 +25,32 @@ var movieConstructor = (movie, studio) => ({
   studioId: studio.id
 });
 
+// src/constants/users.ts
+var users = [
+  {
+    id: 1,
+    name: "John Doe",
+    email: "jhon.doe@domain.com",
+    password: "123456",
+    avatar: "https://i.pravatar.cc/600?img=17"
+  },
+  {
+    id: 2,
+    name: "Jane Doe",
+    email: "jane.doe@domain.com",
+    password: "#user.test!",
+    avatar: "https://i.pravatar.cc/600?img=5"
+  }
+];
+
+// src/helpers/auth.ts
+var getUserByUsernameAndPassword = ({
+  username,
+  password
+}) => users.find(
+  (user) => user.email === username && user.password === password
+);
+
 // src/constants/studio_constants.ts
 var PORT = 3e3;
 var movieAge = [
@@ -235,6 +261,19 @@ app.get("/movieAge", function(_req, res) {
   res.json(movieAge);
 });
 app.post("/transfer", function(_req, res) {
+});
+app.post("/login", function(req, res) {
+  const { username, password } = req.body;
+  if (username === "" || password === "") {
+    res.status(400).json({ error: "Missing username or password" });
+    return;
+  }
+  const user = getUserByUsernameAndPassword({ username, password });
+  if (!user) {
+    res.status(401).json({ error: "Invalid username or password" });
+    return;
+  }
+  res.json(user);
 });
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
