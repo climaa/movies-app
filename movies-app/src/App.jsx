@@ -1,6 +1,7 @@
 import "./App.css";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import useFetch from "./api/fetch";
+import useIsMobile from './utils/hooks/useIsMobile';
 import { createStudioNameMapping } from "./utils";
 import { Avatar, Card, Paper, Grid, Typography } from "@material-ui/core";
 
@@ -11,8 +12,21 @@ const App = () => {
   });
   const { status: studioStatus, data: studios } = useFetch("/studios");
   const { status: moviesStatus, data: movies } = useFetch("/movies");
+  const isMobile = useIsMobile();
 
-  const studioNameMapping = useMemo(() => createStudioNameMapping(studios), [studios]);
+  const studioNameMapping = useMemo(
+    () => createStudioNameMapping(studios),
+    [studios]
+  );
+
+  // Bad practice: is better create CSS in a long term
+  useEffect(() => {
+    setState((prevState) => ({
+      ...prevState,
+      avatarSize: isMobile ? 60 : 280,
+      cardStyle: isMobile ? "mobileCard" : "regularCard",
+    }))
+  }, [isMobile]);
 
   return (
     <div className="App">
@@ -61,18 +75,14 @@ const App = () => {
                     }}
                   />
                   <div>
-                    <Typography color="primary">Name: </Typography>
-                    <Typography className="App__movie__name">
-                      {movie.name}
+                    <Typography>
+                      <strong>Name:</strong> {movie.name}
                     </Typography>
-                    <Typography color="info">Position: </Typography>
-                    <Typography className="App__movie__position">
-                      {movie.position}
+                    <Typography color="info">
+                      Price: <strong>${movie.price}</strong>
                     </Typography>
                   </div>
-                  <Typography>
-                    {studioNameMapping[movie?.studioId]}
-                  </Typography>
+                  <Typography>{studioNameMapping[movie?.studioId]}</Typography>
                 </Card>
               </Grid>
             ))}
