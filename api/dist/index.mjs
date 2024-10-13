@@ -22,6 +22,7 @@ var movieConstructor = (movie, studio) => ({
   id: movie.id,
   img: movie.url,
   name: movie.name,
+  price: movie.price,
   studioId: studio.id
 });
 
@@ -134,7 +135,7 @@ var disney = {
       name: "Aladdin",
       genre: GENRE_ID.animation,
       url: "https://www.lainformacion.com/files/article_default_content/uploads/2018/11/23/5bf84292d23b5.jpeg",
-      price: 1e10
+      price: 100
     },
     {
       id: "13",
@@ -164,7 +165,7 @@ var warner = {
       name: "The conjuring",
       genre: GENRE_ID.horror,
       url: "https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_.jpg",
-      price: 1e9
+      price: 100
     },
     {
       id: "22",
@@ -222,7 +223,7 @@ var sony = {
       id: "34",
       url: "https://m.media-amazon.com/images/M/MV5BZDEwY2FkNDYtNTVjYi00YWFkLWJmOWMtYjk5NTMyNzZlYWEwXkEyXkFqcGc@._V1_QL75_UY562_CR19,0,380,562_.jpg",
       name: "Last action hero",
-      price: 1e13
+      price: 100
     }
   ]
 };

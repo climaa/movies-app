@@ -43,5 +43,6 @@ export const movieConstructor = (
   id: movie.id,
   img: movie.url,
   name: movie.name,
+  price: movie.price,
   studioId: studio.id,
 });

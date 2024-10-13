@@ -25,5 +25,6 @@ export interface ConstructorMovie {
   id: string;
   img: string;
   name: string;
+  price: number;
   studioId: string;
 }
