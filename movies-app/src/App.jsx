@@ -41,8 +41,8 @@ const App = () => {
           <Grid container className="App-studios">
             {studios.map(({ name, logo, shortName, description }) => (
               <Paper elevation={0} key={shortName}>
-                <Typography>{name}</Typography>
                 <Avatar alt={shortName} src={logo} />
+                <Typography>{name}</Typography>
                 {description && <p>{description}</p>}
               </Paper>
             ))}
@@ -62,7 +62,7 @@ const App = () => {
             container
             justifyContent="center"
           >
-            {movies.map((movie, idx) => (
+            {movies.map((movie) => (
               <Grid key={movie.id} item xs={12} sm={6} lg={4}>
                 <Card className={state.cardStyle}>
                   <Avatar
@@ -75,10 +75,10 @@ const App = () => {
                     }}
                   />
                   <div>
-                    <Typography>
+                    <Typography className="App__movie__name">
                       <strong>Name:</strong> {movie.name}
                     </Typography>
-                    <Typography color="info">
+                    <Typography className="App__movie__price" color="info">
                       Price: <strong>${movie.price}</strong>
                     </Typography>
                   </div>
