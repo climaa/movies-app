@@ -1,15 +1,12 @@
 .App {
-  height: 100%;
-  min-height: 400px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
+  background-color: #fbfbfb;
+  color: #222;
+  font-family: 'Roboto', sans-serif;
 }
 
 .App-flex {
-  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -48,10 +45,31 @@
 }
 
 .App-studios {
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
 }
 
 .Position-font {
+  font-weight: bold;
+}
+
+.Avatar__movie__image {
+  background-image: url('https://image.shutterstock.com/image-vector/male-avatar-profile-picture-vector-600w-149083895.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 100px;
+  margin: 5px;
+  width: 100px;
+}
+
+.App__movie__name {
+  display: inline-block;
+}
+
+.App__movie__position {
+  display: inline-block;
   font-weight: bold;
 }
 
