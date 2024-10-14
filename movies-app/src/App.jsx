@@ -38,7 +38,7 @@ const App = () => {
         {studios.length === 0 && studioStatus === "resolved" ? (
           <p>No studios found!</p>
         ) : (
-          <Grid container className="App-studios">
+          <Grid container className="App-studios" data-testid="studios_section">
             {studios.map(({ name, logo, shortName, description }) => (
               <Paper elevation={0} key={shortName}>
                 <Avatar alt={shortName} src={logo} />
