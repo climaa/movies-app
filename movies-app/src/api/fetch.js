@@ -4,6 +4,8 @@
  */
 import { useState, useEffect } from "react";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const useFetch = (endpoint) => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const [data, setData] = useState([]);
@@ -27,5 +29,23 @@ const useFetch = (endpoint) => {
 
     return {status, data};
 }
+
+export async function Post(endpoint, postData) {
+    let data = null;
+    try {
+        const response = await fetch(`${apiUrl}${endpoint}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData),
+        });
+        data = await response.json();
+        return data
+    } catch (error) {
+        throw new Error(`Error sending post: ${error}`);
+    }
+};
+
 
 export default useFetch;

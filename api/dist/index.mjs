@@ -142,7 +142,7 @@ var disney = {
       id: "13",
       name: "The avengers",
       price: 300,
-      url: "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/2/2b/The_Avengers_Poster.png/revision/latest?cb=20150610135853&path-prefix=es"
+      url: "https://resizing.flixster.com/6WHSHxkCrLKGv6bAXMn1A26ehVM=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p8815512_p_v8_ax.jpg"
     },
     {
       genre: GENRE_ID.adventures,
@@ -170,9 +170,9 @@ var warner = {
     {
       genre: GENRE_ID.animation,
       id: "22",
-      name: "Space Jame",
+      name: "Space Jam",
       price: 500,
-      url: "https://static.wikia.nocookie.net/warnerbros/images/d/d0/SpaceJam.jpg/revision/latest/scale-to-width-down/350?cb=20120727135751&path-prefix=es"
+      url: "https://resizing.flixster.com/OLsekYZGM0iuIeN_2TEKljcNR6A=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p18721_p_v10_ab.jpg"
     },
     {
       genre: GENRE_ID.heroes,

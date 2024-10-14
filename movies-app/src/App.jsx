@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useState, useMemo, useEffect } from "react";
-import useFetch from "./api/fetch";
-import useIsMobile from './utils/hooks/useIsMobile';
+import useFetch, { Post } from "./api/fetch";
+import useIsMobile from "./utils/hooks/useIsMobile";
 import { createStudioNameMapping } from "./utils";
 import { Avatar, Card, Paper, Grid, Typography } from "@material-ui/core";
 
@@ -10,8 +10,8 @@ const App = () => {
     avatarSize: 280,
     cardStyle: "regularCard",
   });
-  const { status: studioStatus, data: studios } = useFetch("/studios");
-  const { status: moviesStatus, data: movies } = useFetch("/movies");
+  let { status: studioStatus, data: studios } = useFetch("/studios");
+  let { status: moviesStatus, data: movies } = useFetch("/movies");
   const isMobile = useIsMobile();
 
   const studioNameMapping = useMemo(
@@ -25,8 +25,18 @@ const App = () => {
       ...prevState,
       avatarSize: isMobile ? 60 : 280,
       cardStyle: isMobile ? "mobileCard" : "regularCard",
-    }))
+    }));
   }, [isMobile]);
+
+  const handleTransferMovie = async ({
+    originStudioId,
+    movieId,
+    destinationStudioId,
+  }) => {
+    await Post("/transfer", { originStudioId, movieId, destinationStudioId });
+    // TODO: Need here more logic to update the UI
+    window.location.reload();
+  };
 
   return (
     <div className="App">
@@ -65,7 +75,7 @@ const App = () => {
             {movies.map((movie) => (
               <Grid key={movie.id} item xs={12} sm={6} lg={4}>
                 <Card className={state.cardStyle}>
-                  <Typography >{studioNameMapping[movie?.studioId]}</Typography>
+                  <Typography>{studioNameMapping[movie?.studioId]}</Typography>
                   <Avatar
                     alt={movie.name}
                     className="Avatar__movie__image"
@@ -75,13 +85,42 @@ const App = () => {
                       height: state.avatarSize,
                     }}
                   />
-                  <Grid item xs={5} sm={6} lg={4}>
-                    <Typography className="App__movie__name">
-                      <strong>Name:</strong> {movie.name}
+                  <Grid item xs={5} sm={6} lg={6}>
+                    <Grid item>
+                      <Typography className="App__movie__name">
+                        <strong>Name:</strong> {movie.name}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography className="App__movie__price">
+                        Price: <strong>${movie.price}</strong>
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                    <Typography className="App__movie__transfer">
+                      <strong>Transfer movie to studio:</strong>
+                      <select
+                        onChange={(event) => {
+                          event.preventDefault();
+                          handleTransferMovie({
+                            originStudioId: movie?.studioId,
+                            movieId: movie.id,
+                            destinationStudioId: event.target.value,
+                          });
+                        }}
+                      >
+                        {Object.entries(studioNameMapping).map(([id, name]) => (
+                          <option
+                            key={id}
+                            value={id}
+                            defaultValue={id === movie.studioId}
+                          >
+                            {name}
+                          </option>
+                        ))}
+                      </select>
                     </Typography>
-                    <Typography className="App__movie__price">
-                      Price: <strong>${movie.price}</strong>
-                    </Typography>
+                    </Grid>
                   </Grid>
                 </Card>
               </Grid>
