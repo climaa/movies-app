@@ -2,30 +2,33 @@ name: End to end
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x, 20.x]
-
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          node-version: "20"
       
       - name: Install dependencies
-        run: 
+        run: |
+          cd e2e
           npm ci
+          cd ../api
+          npm install
+          cd ../movies-app
+          npm install
       
       # Cypress integration starts here
       - name: Cache Cypress binary
@@ -37,12 +40,11 @@ jobs:
             ${{ runner.os }}-cypress-
       
       - name: Install Cypress
-        run: npm install cypress
+        run: | 
+          cd e2e
+          npm install cypress
       
       - name: Run Cypress tests
-        uses: cypress-io/github-action@v4.1.0
-        with:
-          start: npm run e2e:run
-          wait-on: 'http://localhost:3001'
-          wait-on-timeout: 300 # optional: timeout in seconds for wait-on
-          command: npx cypress run --config-file cypress.config.js
+        run: | 
+          cd e2e
+          npm run start:app & npm run start:api & npm run e2e:run
