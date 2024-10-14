@@ -65,6 +65,7 @@ const App = () => {
             {movies.map((movie) => (
               <Grid key={movie.id} item xs={12} sm={6} lg={4}>
                 <Card className={state.cardStyle}>
+                  <Typography >{studioNameMapping[movie?.studioId]}</Typography>
                   <Avatar
                     alt={movie.name}
                     className="Avatar__movie__image"
@@ -74,15 +75,14 @@ const App = () => {
                       height: state.avatarSize,
                     }}
                   />
-                  <div>
+                  <Grid item xs={5} sm={6} lg={4}>
                     <Typography className="App__movie__name">
                       <strong>Name:</strong> {movie.name}
                     </Typography>
-                    <Typography className="App__movie__price" color="info">
+                    <Typography className="App__movie__price">
                       Price: <strong>${movie.price}</strong>
                     </Typography>
-                  </div>
-                  <Typography>{studioNameMapping[movie?.studioId]}</Typography>
+                  </Grid>
                 </Card>
               </Grid>
             ))}
