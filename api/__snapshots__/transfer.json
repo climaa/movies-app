@@ -5,29 +5,7 @@
     "shortName": "Disney",
     "logo": "https://cdn.mos.cms.futurecdn.net/qfFFFhnM8LwZnjpTECN3oB.jpg",
     "money": 1000,
-    "movies": [
-      {
-        "genre": 6,
-        "id": "11",
-        "name": "Nightmare before christmas",
-        "price": 600,
-        "url": "https://www.dimanoinmano.it/img/638590/full/libri-per-ragazzi/infanzia/nightmare-before-christmas.jpg"
-      },
-      {
-        "genre": 1,
-        "id": "13",
-        "name": "The avengers",
-        "price": 300,
-        "url": "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/2/2b/The_Avengers_Poster.png/revision/latest?cb=20150610135853&path-prefix=es"
-      },
-      {
-        "genre": 9,
-        "id": "14",
-        "name": "John Carter",
-        "price": 400,
-        "url": "https://upload.wikimedia.org/wikipedia/en/thumb/a/aa/John_carter_poster.jpg/220px-John_carter_poster.jpg"
-      }
-    ]
+    "movies": []
   },
   "2": {
     "id": "2",
@@ -46,9 +24,9 @@
       {
         "genre": 4,
         "id": "22",
-        "name": "Space Jame",
+        "name": "Space Jam",
         "price": 500,
-        "url": "https://static.wikia.nocookie.net/warnerbros/images/d/d0/SpaceJam.jpg/revision/latest/scale-to-width-down/350?cb=20120727135751&path-prefix=es"
+        "url": "https://resizing.flixster.com/OLsekYZGM0iuIeN_2TEKljcNR6A=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p18721_p_v10_ab.jpg"
       },
       {
         "genre": 1,
@@ -63,16 +41,28 @@
         "name": "Fantastic beasts and where to find them",
         "price": 500,
         "url": "https://i.pinimg.com/originals/11/95/b8/1195b802fe9108f0458830054ba1fd57.jpg"
-      }
-    ]
-  },
-  "3": {
-    "id": "3",
-    "name": "Sony Pictures",
-    "shortName": "Sony",
-    "logo": "https://logoeps.com/wp-content/uploads/2013/05/sony-pictures-entertainment-vector-logo.png",
-    "money": 700,
-    "movies": [
+      },
+      {
+        "genre": 1,
+        "id": "13",
+        "name": "The avengers",
+        "price": 300,
+        "url": "https://resizing.flixster.com/6WHSHxkCrLKGv6bAXMn1A26ehVM=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p8815512_p_v8_ax.jpg"
+      },
+      {
+        "genre": 6,
+        "id": "11",
+        "name": "Nightmare before christmas",
+        "price": 600,
+        "url": "https://www.dimanoinmano.it/img/638590/full/libri-per-ragazzi/infanzia/nightmare-before-christmas.jpg"
+      },
+      {
+        "genre": 4,
+        "id": "12",
+        "name": "Aladdin",
+        "price": 100,
+        "url": "https://www.lainformacion.com/files/article_default_content/uploads/2018/11/23/5bf84292d23b5.jpeg"
+      },
       {
         "genre": 6,
         "id": "31",
@@ -86,7 +76,16 @@
         "url": "https://m.media-amazon.com/images/M/MV5BMjMwNDkxMTgzOF5BMl5BanBnXkFtZTgwNTkwNTQ3NjM@._V1_QL75_UX380_CR0,1,380,562_.jpg",
         "name": "Spider-man into the spider-verse",
         "price": 450
-      },
+      }
+    ]
+  },
+  "3": {
+    "id": "3",
+    "name": "Sony Pictures",
+    "shortName": "Sony",
+    "logo": "https://logoeps.com/wp-content/uploads/2013/05/sony-pictures-entertainment-vector-logo.png",
+    "money": 700,
+    "movies": [
       {
         "genre": 1,
         "id": "33",
@@ -101,13 +100,7 @@
         "name": "Last action hero",
         "price": 100
       },
-      {
-        "genre": 4,
-        "id": "12",
-        "name": "Aladdin",
-        "price": 100,
-        "url": "https://www.lainformacion.com/files/article_default_content/uploads/2018/11/23/5bf84292d23b5.jpeg"
-      }
+      null
     ]
   }
 }
