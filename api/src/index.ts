@@ -10,7 +10,6 @@ import {
   sony,
   warner,
   studiosMap,
-  StudiosMap
 } from "@constants/studio_constants";
 import type { Movie, Studio, OnlyStudio } from "@constants/types";
 
@@ -59,7 +58,6 @@ app.get("/movieAge", function (_req: Request, res: Response) {
   res.json(movieAge);
 });
 
-// TODO: Add the capability to sell the movie rights to another studio
 app.post("/transfer", function (req: Request, res: Response) {
   const { originStudioId, movieId, destinationStudioId } = req.body as { originStudioId: number; movieId: string; destinationStudioId: number };
   const originStudio: Studio = studiosMap[originStudioId];
