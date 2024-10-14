@@ -9,8 +9,10 @@ import {
   PORT,
   sony,
   warner,
+  studiosMap,
+  StudiosMap
 } from "@constants/studio_constants";
-import type { Studio, OnlyStudio } from "@constants/types";
+import type { Movie, Studio, OnlyStudio } from "@constants/types";
 
 const app = express();
 
@@ -57,8 +59,19 @@ app.get("/movieAge", function (_req: Request, res: Response) {
   res.json(movieAge);
 });
 
-// TODO: 1 add the capability to sell the movie rights to another studio
-app.post("/transfer", function (_req: Request, res: Response) {});
+// TODO: Add the capability to sell the movie rights to another studio
+app.post("/transfer", function (req: Request, res: Response) {
+  const { originStudioId, movieId, destinationStudioId } = req.body as { originStudioId: number; movieId: string; destinationStudioId: number };
+  const originStudio: Studio = studiosMap[originStudioId];
+  // Find the movie in the origin studio, and get the movie object
+  const index: number = originStudio.movies.findIndex((movie: Movie) => movie.id === movieId);
+  const movie: Movie = originStudio.movies[index];
+  // Remove from origin studio the movie
+  studiosMap[originStudioId].movies.splice(index, 1);
+  // Add the movie to the destination studio
+  studiosMap[destinationStudioId].movies.push(movie);
+  res.json(studiosMap);
+});
 
 app.post("/login", function (req: Request, res: Response) {
   const { username, password } = req.body as { username: string; password: string };

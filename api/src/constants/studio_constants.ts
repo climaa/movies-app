@@ -1,4 +1,4 @@
-import { Studio } from "./types";
+import { Studio, StudiosMap } from "./types";
 
 export const PORT = 3000;
 
@@ -75,32 +75,32 @@ export const disney: Studio = {
   money: 1000,
   movies: [
     {
+      genre: GENRE_ID.horror,
       id: "11",
       name: "Nightmare before christmas",
-      genre: GENRE_ID.horror,
-      url: "https://www.dimanoinmano.it/img/638590/full/libri-per-ragazzi/infanzia/nightmare-before-christmas.jpg",
       price: 600,
+      url: "https://www.dimanoinmano.it/img/638590/full/libri-per-ragazzi/infanzia/nightmare-before-christmas.jpg",
     },
     {
+      genre: GENRE_ID.animation,
       id: "12",
       name: "Aladdin",
-      genre: GENRE_ID.animation,
-      url: "https://www.lainformacion.com/files/article_default_content/uploads/2018/11/23/5bf84292d23b5.jpeg",
       price: 100,
+      url: "https://www.lainformacion.com/files/article_default_content/uploads/2018/11/23/5bf84292d23b5.jpeg",
     },
     {
+      genre: GENRE_ID.heroes,
       id: "13",
       name: "The avengers",
-      genre: GENRE_ID.heroes,
-      url: "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/2/2b/The_Avengers_Poster.png/revision/latest?cb=20150610135853&path-prefix=es",
       price: 300,
+      url: "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/2/2b/The_Avengers_Poster.png/revision/latest?cb=20150610135853&path-prefix=es",
     },
     {
+      genre: GENRE_ID.adventures,
       id: "14",
       name: "John Carter",
-      genre: GENRE_ID.adventures,
-      url: "https://upload.wikimedia.org/wikipedia/en/thumb/a/aa/John_carter_poster.jpg/220px-John_carter_poster.jpg",
       price: 400,
+      url: "https://upload.wikimedia.org/wikipedia/en/thumb/a/aa/John_carter_poster.jpg/220px-John_carter_poster.jpg",
     },
   ],
 };
@@ -113,32 +113,32 @@ export const warner: Studio = {
   money: 900,
   movies: [
     {
+      genre: GENRE_ID.horror,
       id: "21",
       name: "The conjuring",
-      genre: GENRE_ID.horror,
-      url: "https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_.jpg",
       price: 100,
+      url: "https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_.jpg",
     },
     {
+      genre: GENRE_ID.animation,
       id: "22",
       name: "Space Jame",
-      genre: GENRE_ID.animation,
-      url: "https://static.wikia.nocookie.net/warnerbros/images/d/d0/SpaceJam.jpg/revision/latest/scale-to-width-down/350?cb=20120727135751&path-prefix=es",
       price: 500,
+      url: "https://static.wikia.nocookie.net/warnerbros/images/d/d0/SpaceJam.jpg/revision/latest/scale-to-width-down/350?cb=20120727135751&path-prefix=es",
     },
     {
+      genre: GENRE_ID.heroes,
       id: "23",
       name: "The dark knight rises",
-      genre: GENRE_ID.heroes,
-      url: "https://pics.filmaffinity.com/The_Dark_Knight_Rises-149544881-large.jpg",
       price: 400,
+      url: "https://pics.filmaffinity.com/The_Dark_Knight_Rises-149544881-large.jpg",
     },
     {
+      genre: GENRE_ID.adventures,
       id: "24",
       name: "Fantastic beasts and where to find them",
-      genre: GENRE_ID.adventures,
-      url: "https://i.pinimg.com/originals/11/95/b8/1195b802fe9108f0458830054ba1fd57.jpg",
       price: 500,
+      url: "https://i.pinimg.com/originals/11/95/b8/1195b802fe9108f0458830054ba1fd57.jpg",
     },
   ],
 };
@@ -208,7 +208,7 @@ export const sonyImages: { [n: number]: string } = {
  * @property {string} 2 - Warner studio.
  * @property {string} 3 - Sony studio.
  */
-export const studiosMap = {
+export const studiosMap: StudiosMap = {
   1: disney,
   2: warner,
   3: sony,

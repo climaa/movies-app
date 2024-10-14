@@ -28,3 +28,7 @@ export interface ConstructorMovie {
   price: number;
   studioId: string;
 }
+
+export type StudiosMap = {
+  [key: number]: Studio;
+};
