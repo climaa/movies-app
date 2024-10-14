@@ -3,16 +3,25 @@ import React, { useState, useMemo, useEffect } from "react";
 import useFetch, { Post } from "./api/fetch";
 import useIsMobile from "./utils/hooks/useIsMobile";
 import { createStudioNameMapping } from "./utils";
-import { Avatar, Card, Paper, Grid, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  Card,
+  Paper,
+  Grid,
+  Typography,
+} from "@material-ui/core";
 
 const App = () => {
   const [state, setState] = useState({
     avatarSize: 280,
     cardStyle: "regularCard",
+    selectedStudio: null,
   });
-  let { status: studioStatus, data: studios } = useFetch("/studios");
-  let { status: moviesStatus, data: movies } = useFetch("/movies");
+  const { status: studioStatus, data: studios } = useFetch("/studios");
+  const { status: moviesStatus, data: movies } = useFetch("/movies");
   const isMobile = useIsMobile();
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   const studioNameMapping = useMemo(
     () => createStudioNameMapping(studios),
@@ -27,6 +36,17 @@ const App = () => {
       cardStyle: isMobile ? "mobileCard" : "regularCard",
     }));
   }, [isMobile]);
+
+  useEffect(() => {
+    setFilteredMovies(movies);
+
+    if (state.selectedStudio) {
+      const filtered = movies.filter(
+        (movie) => movie.studioId === state.selectedStudio
+      );
+      setFilteredMovies(filtered);
+    }
+  }, [movies, state.selectedStudio]);
 
   const handleTransferMovie = async ({
     originStudioId,
@@ -48,15 +68,43 @@ const App = () => {
         {studios.length === 0 && studioStatus === "resolved" ? (
           <p>No studios found!</p>
         ) : (
-          <Grid container className="App-studios" data-testid="studios_section">
-            {studios.map(({ name, logo, shortName, description }) => (
-              <Paper elevation={0} key={shortName}>
-                <Avatar alt={shortName} src={logo} />
-                <Typography>{name}</Typography>
-                {description && <p>{description}</p>}
-              </Paper>
-            ))}
-          </Grid>
+          <>
+            <Grid
+              container
+              className="App-studios"
+              data-testid="studios_section"
+            >
+              {studios.map(({ id, name, logo, shortName, description }) => (
+                <Paper
+                  elevation={0}
+                  key={shortName}
+                  onClick={() =>
+                    setState((prevState) => {
+                      console.log(shortName);
+                      return { ...prevState, selectedStudio: id };
+                    })
+                  }
+                >
+                  <Avatar alt={shortName} src={logo} />
+                  <Typography>{name}</Typography>
+                  {description && <p>{description}</p>}
+                </Paper>
+              ))}
+            </Grid>
+            {state.selectedStudio !== null && (
+              <Button
+                variant="outlined"
+                onClick={() =>
+                  setState((prevState) => ({
+                    ...prevState,
+                    selectedStudio: null,
+                  }))
+                }
+              >
+                Reset filter
+              </Button>
+            )}
+          </>
         )}
 
         <h3>Movies</h3>
@@ -72,7 +120,7 @@ const App = () => {
             container
             justifyContent="center"
           >
-            {movies.map((movie) => (
+            {filteredMovies.map((movie) => (
               <Grid key={movie.id} item xs={12} sm={6} lg={4}>
                 <Card className={state.cardStyle}>
                   <Typography>{studioNameMapping[movie?.studioId]}</Typography>
@@ -97,29 +145,31 @@ const App = () => {
                       </Typography>
                     </Grid>
                     <Grid item>
-                    <Typography className="App__movie__transfer">
-                      <strong>Transfer movie to studio:</strong>
-                      <select
-                        onChange={(event) => {
-                          event.preventDefault();
-                          handleTransferMovie({
-                            originStudioId: movie?.studioId,
-                            movieId: movie.id,
-                            destinationStudioId: event.target.value,
-                          });
-                        }}
-                      >
-                        {Object.entries(studioNameMapping).map(([id, name]) => (
-                          <option
-                            key={id}
-                            value={id}
-                            defaultValue={id === movie.studioId}
-                          >
-                            {name}
-                          </option>
-                        ))}
-                      </select>
-                    </Typography>
+                      <Typography className="App__movie__transfer">
+                        <strong>Transfer movie to studio:</strong>
+                        <select
+                          onChange={(event) => {
+                            event.preventDefault();
+                            handleTransferMovie({
+                              originStudioId: movie?.studioId,
+                              movieId: movie.id,
+                              destinationStudioId: event.target.value,
+                            });
+                          }}
+                        >
+                          {Object.entries(studioNameMapping).map(
+                            ([id, name]) => (
+                              <option
+                                key={id}
+                                value={id}
+                                defaultValue={id === movie.studioId}
+                              >
+                                {name}
+                              </option>
+                            )
+                          )}
+                        </select>
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Card>
